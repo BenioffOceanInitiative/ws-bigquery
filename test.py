@@ -11,7 +11,9 @@ from google.oauth2 import service_account
 
 
 credentials = service_account.Credentials.from_service_account_file(
-    '/Users/seangoral/bq_api_test/Benioff Ocean Initiative-454f666d1896.json')
+    '/Users/seangoral/bq_api_test/venv/Benioff Ocean Initiative-454f666d1896.json')
+    #FILL IN YOUR PATH TO THE 'Benioff Ocean Initiative-454f666d1896.json'
+#credentials = service_account.Credentials.from_service_account_file('PATH TO JSON')
 
 project_id = 'benioff-ocean-initiative'
 client = bigquery.Client(credentials= credentials,project=project_id)
