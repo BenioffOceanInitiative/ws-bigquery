@@ -9,41 +9,22 @@ Created on Thu Apr  2 14:04:52 2020
 from google.cloud import bigquery
 from google.oauth2 import service_account
 
+#FILL IN YOUR PATH TO THE 'Benioff Ocean Initiative-454f666d1896.json'
+credentials_json = '/Users/seangoral/bq_api_test/venv/Benioff Ocean Initiative-454f666d1896.json'
 
-credentials = service_account.Credentials.from_service_account_file(
-    '/Users/seangoral/bq_api_test/venv/Benioff Ocean Initiative-454f666d1896.json')
-    #FILL IN YOUR PATH TO THE 'Benioff Ocean Initiative-454f666d1896.json'
-#credentials = service_account.Credentials.from_service_account_file('PATH TO JSON')
+credentials = service_account.Credentials.from_service_account_file(credentials_json)
 
 project_id = 'benioff-ocean-initiative'
 client = bigquery.Client(credentials= credentials,project=project_id)
 
-def format_gfw_data():
-    with open('queries/format_gfw_data.sql') as query_file:
+def run_query(sql):
+    with open('queries/' + sql + '.sql') as sql_file:
         query = query_file.read()
         query_job = client.query(query)
-        query_job.result()
-
-def join_gfw_ihs_data():
-    with open('queries/join_gfw_ihs_data.sql') as query_file:
-        query = query_file.read()
-        query_job = client.query(query)
-        query_job.result()
-
-def create_gfw_ihs_segments():
-    with open('queries/create_gfw_ihs_segments.sql') as query_file:
-        query = query_file.read()
-        query_job = client.query(query)
-        query_job.result()
-        
-def vsr_intersect():
-    with open('queries/vsr_intersect.sql') as query_file:
-        query = query_file.read()
-        query_job = client.query(query)
-        query_job.result()
+        query_job.result()        
 
 if __name__ == '__main__':
-    format_gfw_data()
-    join_gfw_ihs_data()
-    create_gfw_ihs_segments()
-    vsr_intersect()
+    run_query('format_gfw_data')
+    run_query('join_gfw_ihs_data')
+    run_query('create_gfw_ihs_segments')
+    run_query('vsr_intersect')
