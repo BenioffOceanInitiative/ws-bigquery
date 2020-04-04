@@ -19,7 +19,7 @@ client = bigquery.Client(credentials= credentials,project=project_id)
 
 def run_query(sql):
     with open('queries/' + sql + '.sql') as sql_file:
-        query = query_file.read()
+        query = sql_file.read()
         query_job = client.query(query)
         query_job.result()        
 
