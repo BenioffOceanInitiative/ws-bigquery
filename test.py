@@ -25,7 +25,7 @@ def run_query(sql):
 
 if __name__ == '__main__':
     run_query('create_gfw_table')
-    run_query('create_gfw_ihs_tble')
+    run_query('create_gfw_ihs_table')
     run_query('create_gfw_ihs_segments_table')
     run_query('create_gfw_ihs_vsr_segments_table')
     run_query('insert_gfw_data')
