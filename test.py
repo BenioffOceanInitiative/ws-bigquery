@@ -24,7 +24,12 @@ def run_query(sql):
         query_job.result()        
 
 if __name__ == '__main__':
-    run_query('format_gfw_data')
-    run_query('join_gfw_ihs_data')
-    run_query('create_gfw_ihs_segments')
-    run_query('vsr_intersect')
+    run_query('create_gfw_table')
+    run_query('create_gfw_ihs_tble')
+    run_query('create_gfw_ihs_segments_table')
+    run_query('create_gfw_ihs_vsr_segments_table')
+    run_query('insert_gfw_data')
+    run_query('insert_gfw_ihs_data')
+    run_query('insert_gfw_ihs_segments')
+    run_query('insert_gfw_ihs_vsr_segments')
+  
