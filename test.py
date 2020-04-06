@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr  2 14:04:52 2020
-
-@author: seang
+Edited on Mon Apr   6 
+@author: sean goral, ben best
 """
 
 from google.cloud import bigquery
@@ -28,8 +28,5 @@ if __name__ == '__main__':
     run_query('create_gfw_ihs_table')
     run_query('create_gfw_ihs_segments_table')
     run_query('create_gfw_ihs_vsr_segments_table')
-    run_query('insert_gfw_data')
     run_query('insert_gfw_ihs_data')
-    run_query('insert_gfw_ihs_segments')
-    run_query('insert_gfw_ihs_vsr_segments')
-  
+   
