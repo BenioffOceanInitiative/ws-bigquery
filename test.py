@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Created on Thu Apr  2 14:04:52 2020
-Edited on Mon Apr   6 
+
 @author: sean goral, ben best
 """
 
@@ -28,5 +28,5 @@ if __name__ == '__main__':
     run_query('create_gfw_ihs_table')
     run_query('create_gfw_ihs_segments_table')
     run_query('create_gfw_ihs_vsr_segments_table')
-    run_query('insert_gfw_ihs_data')
-   
+    run_query('insert_gfw_ihs_vsr_data')
+ 
