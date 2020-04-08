@@ -5,5 +5,6 @@ timestamp TIMESTAMP,
 lon FLOAT64, 
 lat FLOAT64,
 speed_knots NUMERIC,
-implied_speed_knots NUMERIC
+implied_speed_knots NUMERIC,
+source STRING
 );
