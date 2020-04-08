@@ -5,27 +5,24 @@ lon FLOAT64,
 lat FLOAT64,
 speed_knots NUMERIC,
 implied_speed_knots NUMERIC,
-source STRING
 );
 
 INSERT INTO `temp_gfw_data`
 SELECT 
-mmsi, 
+CAST(mmsi AS INT64) AS mmsi, 
 timestamp, 
 lon, 
 lat, 
 CAST(speed_knots AS NUMERIC) AS speed_knots, 
 CAST(implied_speed_knots AS NUMERIC) AS implied_speed_knots, 
-source 
-FROM `benioff-ocean-initiative.gfw_sample.bq_results_20190601`
+FROM `benioff-ocean-initiative.benioff_datasets.gfw_sb`
 WHERE 
-source = "spire"
-AND 
 timestamp >
 (SELECT 
 MAX(timestamp)
 FROM
-`benioff-ocean-initiative.whalesafe_ais.gfw_data`);
+`benioff-ocean-initiative.whalesafe_ais.gfw_data`)
+;
 
 INSERT INTO `benioff-ocean-initiative.whalesafe_ais.gfw_data`
 SELECT 
@@ -39,7 +36,6 @@ lon FLOAT64,
 lat FLOAT64,
 speed_knots NUMERIC,
 implied_speed_knots NUMERIC,
-source STRING,
 X	INT64,	
 imo_lr_ihs_no INT64,	
 name_of_ship STRING,	
