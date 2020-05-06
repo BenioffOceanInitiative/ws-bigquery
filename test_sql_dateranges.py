@@ -9,9 +9,9 @@ Created on Thu Apr  9 12:31:09 2020
 from google.cloud import bigquery
 from google.oauth2 import service_account
 from jinjasql import JinjaSql
-
+ 
 #FILL IN YOUR PATH TO THE 'Benioff Ocean Initiative-454f666d1896.json'
-credentials_json = '/Users/seangoral/bq_api_test/venv/Benioff Ocean Initiative-454f666d1896.json'
+credentials_json = '/Users/seangoral/bq_api_test/benioff-ocean-initiative-cc06de0db3ce.json'
 
 credentials = service_account.Credentials.from_service_account_file(credentials_json)
 
@@ -75,10 +75,36 @@ params = {
 }
 
 
+#j = JinjaSql(param_style='pyformat')
+#query, bind_params = j.prepare_query(stats_query, params)
+
+#query_job = client.query(query % bind_params)
+#tst=query_job.result() 
+ 
+def get_new_ts ():      
+    sql = """SELECT MAX(newest_timestamp) as newest_timestamp 
+    FROM `benioff-ocean-initiative.benioff_datasets.newest_gfw_timestamp`;"""
+    df = client.query(sql)
+    for result in df:
+        return(result[0])
+
+new_ts = get_new_ts().strftime('%Y-%m-%d %H:%M:%S')
+
+para = {'newest_ts': new_ts}
+
+q = '''SELECT
+ ssvid AS mmsi,
+ timestamp,
+ lat,
+ lon,
+ speed_knots,
+ implied_speed_knots,
+ source
+FROM
+ `world-fishing-827.gfw_research.pipe_v20190502`
+WHERE 
+ date >= '{{ newest_ts }}' LIMIT 1000;'''
 j = JinjaSql(param_style='pyformat')
-query, bind_params = j.prepare_query(stats_query, params)
+query, bind_params = j.prepare_query(q, para)
 
-query_job = client.query(query % bind_params)
-tst=query_job.result()  
-        
-
+df_ts = client.query(query % bind_params).to_dataframe()
