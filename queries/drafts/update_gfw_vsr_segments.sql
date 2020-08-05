@@ -129,8 +129,8 @@
                 CREATE TABLE IF NOT EXISTS `benioff-ocean-initiative.whalesafe.timestamp_log` (
                         newest_timestamp TIMESTAMP,
                         date_accessed TIMESTAMP,
-                        table_name STRING
-);
+                        table_name STRING);
+                        
                         -- # Step 6: Insert the previous/starting newest `whalesafe.gfw_vsr_segments` timestamp, new_vsr_seg_ts, into `whalesafe.timestamp_log`
                         INSERT INTO `benioff-ocean-initiative.whalesafe.timestamp_log`
                         SELECT
