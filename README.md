@@ -1,5 +1,11 @@
-# whalesafe_bigquery_sql
+# WhaleSafe BigQuery SQL
 Execute SQL to process Global Fishing Watch AIS messages data into geospatial data and produce vessel speed reduction statistics.
+
+
+
+<p align="center">
+<img width="460" height="300" src="./figures/ws.png">
+</p>
 
 ## Setup Python
 
@@ -34,3 +40,6 @@ Setup BigQuery Project and utilize SQL in queries folder to create and update ta
 5. Calculate statistics for each mmsi (vessel), grouped by day, month, and year.
 6. Calculate statistics for each operator (owner of a fleet), grouped by day, month, and year.
 
+<p align="center">
+<img width="460" height="300" src="./figures/floaty.gif">
+</p>
