@@ -23,4 +23,14 @@ Essentially:
 
 ## Run Queries
 
-Setup BigQuery Project, and utilize SQL in quries to create and update tables in a BQ dataset.
+Setup BigQuery Project and utilize SQL in queries folder to create and update tables in a BQ dataset.
+
+0. Ensure you have created a BigQuery project and a dataset that matches SQL queries in query folder. ex) our dataset is called "whalesafe_v2." Also, ensure starting AIS data has correct schema. Finally, ensure you have VSR zone data (vsr_zones), ownership data (ihs_data), and shoreline data (in our case, us_medium_coastline).
+
+1. Update AIS data (BOI uses GFWW's AIS data pipeline, permissions are required.)
+2. Update AIS segments data table.
+3. Update AIS segments aggregated data (optional). Useful for visualization
+4. Intersect AIS segments data with Vessel Speed Reduction zone by date range and spatially.
+5. Calculate statistics for each mmsi (vessel), grouped by day, month, and year.
+6. Calculate statistics for each operator (owner of a fleet), grouped by day, month, and year.
+
