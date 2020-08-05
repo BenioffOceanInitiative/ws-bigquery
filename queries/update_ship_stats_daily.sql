@@ -113,24 +113,6 @@ CREATE TABLE IF NOT EXISTS `whalesafe_v2.ship_stats_daily` CLUSTER BY
                                 -- # Get cooperation score
                                 CONCAT(ROUND((total_distance_nm_under_10 / total_distance_nm * 100), 1), '%') AS cooperation_score_daily,
                                 ((total_distance_nm_under_10 / total_distance_nm * 100)) AS coop_score_daily,
-                -- # Assign Grading
-                CASE WHEN ((total_distance_nm_under_10 / total_distance_nm) * 100) >= 99 THEN
-                        'A+'
-                WHEN ((total_distance_nm_under_10 / total_distance_nm) * 100) < 99
-AND((total_distance_nm_under_10 / total_distance_nm) * 100) >= 80 THEN
-                        'A'
-                WHEN ((total_distance_nm_under_10 / total_distance_nm) * 100) < 80
-AND((total_distance_nm_under_10 / total_distance_nm) * 100) >= 60 THEN
-                        'B'
-                WHEN ((total_distance_nm_under_10 / total_distance_nm) * 100) < 60
-AND((total_distance_nm_under_10 / total_distance_nm) * 100) >= 40 THEN
-                        'C'
-                WHEN ((total_distance_nm_under_10 / total_distance_nm) * 100) < 40
-AND((total_distance_nm_under_10 / total_distance_nm) * 100) >= 20 THEN
-                        'D'
-                ELSE
-                        'F'
-                END AS month_grade,
                 -- # Show distances km in each speed bin and Calculate percentages for distances travelled in each speed bin
                 total_distance_nm_under_10,
                 CONCAT(ROUND((total_distance_nm_under_10 / total_distance_nm * 100), 1), '%') AS percent_under_10_knots,
@@ -177,7 +159,7 @@ AND((total_distance_nm_under_10 / total_distance_nm) * 100) >= 20 THEN
         ROUND(AVG(final_speed_knots), 1) AS avg_speed_knots,
         -- # Total distance in km where speed <= 10 knots
         -- # A little weirdness with there being distance travelled at 0 knots...
-        SUM( CASE WHEN final_speed_knots >= 0
+        SUM( CASE WHEN final_speed_knots > 0
                 AND final_speed_knots <= 10 THEN
                 ((distance_nm))
 ELSE
@@ -212,7 +194,7 @@ ELSE
         ELSE
                 0
         END) AS total_distance_nm_weird,
-        SUM( CASE WHEN final_speed_knots >= 0
+        SUM( CASE WHEN final_speed_knots > 0
                 AND final_speed_knots <= 50 THEN
                 distance_nm
         ELSE

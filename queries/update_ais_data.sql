@@ -68,11 +68,11 @@ DECLARE
     END AS region
     FROM
 -- -- # Old pipeline, switch to one below. -- -- # Querying GFW AIS pipeline. Requires permissions. 
-    `world-fishing-827.gfw_research.pipe_v20190502` AS ais
+    `gfw_research.ais_pipeline_dummy_2019` AS ais
 WHERE
     date > new_ais_ts
 -- -- # New Pipeline
--- 		`world-fishing-827.gfw_research.pipe_v20200203` AS ais 
+-- 		`gfw_research.ais_pipeline_dummy_2020` AS ais 
 -- 	WHERE
 -- 		_PARTITIONDATE = DATE(new_ais_ts) 
 -- # New GWF pipeline uses '_PARTITIONDATE' as partitioning column.
